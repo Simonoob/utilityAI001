@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbu10b4dfi2o6"]
+
+[ext_resource type="PackedScene" uid="uid://c8ofp2bcjdihh" path="res://scenes/basic_character.tscn" id="1_amnr8"]
+[ext_resource type="Script" path="res://scripts/blackboard.gd" id="2_37aqr"]
+
+[node name="rootNode" type="Node2D"]
+
+[node name="basicCharacter" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
+position = Vector2(567, 282)
+blackBoard = NodePath("../BlackBoard")
+
+[node name="BlackBoard" type="Node2D" parent="."]
+script = ExtResource("2_37aqr")
