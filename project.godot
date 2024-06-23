@@ -14,3 +14,7 @@ config/name="utilityAI001"
 run/main_scene="res://scenes/mainScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
