@@ -1,7 +1,7 @@
 class_name BlackBoard extends Node2D
 
 
-
+@export var basic_character_scene: PackedScene
 
 
 
@@ -67,7 +67,7 @@ func get_distance_from_closest_edge_score(target_position: Vector2):
 	
 	var normalized_distance: float = 1.0 - (distance_from_edge / max_distance_from_edge)
 
-	return normalized_distance
+	return ease_in_quart(normalized_distance)
 
 	#-----------		example: point is closest to the right edge: rect_center becomes Vector2(center.x, point.y)
 	#-----------	normalized_distance_from_closest_edge = distance_point_edge / distance_t_center_edge
@@ -99,6 +99,8 @@ func get_closest_character(target_character: BasicCharacter):
 
 func get_closest_character_distance_score(target_character:BasicCharacter):
 	var closest_character = get_closest_character(target_character)
+	if closest_character == null:
+		return 0.0
 	var distance = target_character.global_position.distance_to(closest_character.global_position)
 
 	#----------- max distance = viewport diagonal
@@ -106,5 +108,18 @@ func get_closest_character_distance_score(target_character:BasicCharacter):
 	return ease_in_quart(1.0 - distance / max_distance)
 
 
+
+
+
+var count = 1
+
+func _on_timer_timeout():
+	var new_character = basic_character_scene.instantiate()
+	new_character.blackBoard = self
+	new_character.position = Vector2.ZERO
+	self.add_child(new_character)
+	new_character.global_position =  get_viewport_rect().get_center()
+	count+=1
+	print(count)
 
 

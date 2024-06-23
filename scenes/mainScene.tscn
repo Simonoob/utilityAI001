@@ -5,23 +5,13 @@
 
 [node name="rootNode" type="Node2D"]
 script = ExtResource("2_37aqr")
+basic_character_scene = ExtResource("1_amnr8")
 
 [node name="basicCharacter2" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
 position = Vector2(302, 200)
 blackBoard = NodePath("..")
 
-[node name="basicCharacter" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
-position = Vector2(845, 517)
-blackBoard = NodePath("..")
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 
-[node name="basicCharacter3" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
-position = Vector2(777, 186)
-blackBoard = NodePath("..")
-
-[node name="basicCharacter4" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
-position = Vector2(297, 534)
-blackBoard = NodePath("..")
-
-[node name="basicCharacter5" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
-position = Vector2(561, 365)
-blackBoard = NodePath("..")
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

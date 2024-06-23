@@ -44,13 +44,12 @@ func compute_action_value(action):
 
 
 func _physics_process(_delta):
-	move_and_slide()
-
-func _on_desicion_timer_timeout():
 	var resolved_actions = actions.map(compute_action_value)
 	resolved_actions.sort_custom(sort_descending)
 
 	resolved_actions[0].action_fn.call()
+	move_and_slide()
+
 
 
 

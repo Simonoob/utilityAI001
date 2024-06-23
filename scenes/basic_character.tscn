@@ -29,9 +29,3 @@ shape = SubResource("CircleShape2D_08i0c")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vj20s")
 animation = &"idle"
-
-[node name="desicionTimer" type="Timer" parent="."]
-wait_time = 0.05
-autostart = true
-
-[connection signal="timeout" from="desicionTimer" to="." method="_on_desicion_timer_timeout"]
