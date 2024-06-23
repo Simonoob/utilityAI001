@@ -4,10 +4,24 @@
 [ext_resource type="Script" path="res://scripts/blackboard.gd" id="2_37aqr"]
 
 [node name="rootNode" type="Node2D"]
+script = ExtResource("2_37aqr")
+
+[node name="basicCharacter2" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
+position = Vector2(302, 200)
+blackBoard = NodePath("..")
 
 [node name="basicCharacter" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
-position = Vector2(567, 282)
-blackBoard = NodePath("../BlackBoard")
+position = Vector2(845, 517)
+blackBoard = NodePath("..")
 
-[node name="BlackBoard" type="Node2D" parent="."]
-script = ExtResource("2_37aqr")
+[node name="basicCharacter3" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
+position = Vector2(777, 186)
+blackBoard = NodePath("..")
+
+[node name="basicCharacter4" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
+position = Vector2(297, 534)
+blackBoard = NodePath("..")
+
+[node name="basicCharacter5" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
+position = Vector2(561, 365)
+blackBoard = NodePath("..")

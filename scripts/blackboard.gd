@@ -11,11 +11,21 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
+# EASING FUNCTIONS
+func ease_in_circ(x: float) -> float:
+	return 1 - sqrt(1 - pow(x, 2));
 
-func get_distance_from_closest_edge(target_position: Vector2):
+func ease_in_quad(x: float) -> float:
+	return x*x
+
+func ease_in_quart(x: float) -> float:
+	return pow(x, 4)
+#-----------
+
+func get_distance_from_closest_edge_score(target_position: Vector2):
 	#----------- get the edges rect
 	var viewport_rect: Rect2 = get_viewport_rect()
 	#----------- get the rect center
@@ -39,7 +49,7 @@ func get_distance_from_closest_edge(target_position: Vector2):
 		]
 
 	#----------- get the closest edge
-	var closest_edge_point: Vector2 = Vector2.ZERO
+	var closest_edge_point: Vector2 = Vector2.INF
 	for edge : Vector2 in edges:
 		if edge.distance_to(target_position) < target_position.distance_to(closest_edge_point):
 			closest_edge_point = edge
@@ -62,6 +72,38 @@ func get_distance_from_closest_edge(target_position: Vector2):
 	#-----------		example: point is closest to the right edge: rect_center becomes Vector2(center.x, point.y)
 	#-----------	normalized_distance_from_closest_edge = distance_point_edge / distance_t_center_edge
 
+
+func get_all_children(in_node, array := []):
+	array.push_back(in_node)
+	for child in in_node.get_children():
+		array = get_all_children(child, array)
+	return array
+
+func get_closest_character(target_character: BasicCharacter):
+	#-----------	get all characters
+	var characters:Array[BasicCharacter] = []
+	var scene_nodes = get_all_children(get_tree().get_root())
+	for node in scene_nodes:
+		if node is BasicCharacter and node != target_character:
+			characters.push_back(node)
+	#-----------	get closest character
+	var closest_character: BasicCharacter 
+	for character in characters:
+		if character.global_position.distance_to(target_character.global_position) < target_character.global_position.distance_to(
+			Vector2.INF if closest_character == null else closest_character.global_position
+			):
+			closest_character = character
+	return closest_character
+
+
+
+func get_closest_character_distance_score(target_character:BasicCharacter):
+	var closest_character = get_closest_character(target_character)
+	var distance = target_character.global_position.distance_to(closest_character.global_position)
+
+	#----------- max distance = viewport diagonal
+	var max_distance = sqrt(pow(get_viewport_rect().size.x,2) + pow(get_viewport_rect().size.y,2))
+	return ease_in_quart(1.0 - distance / max_distance)
 
 
 

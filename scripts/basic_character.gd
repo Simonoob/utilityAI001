@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name BasicCharacter extends CharacterBody2D
 
 
 const SPEED = 300.0
@@ -17,13 +17,23 @@ var actions = [
 	'action_fn': move_away_from_edge,
 	'value_fn': get_move_away_from_edge_score
 	},
+	{
+	'action_fn': move_away_from_closest_character,
+	'value_fn': get_move_away_from_closest_character_score
+	},
 ]
 
 func get_idle_score():
 	return RandomNumberGenerator.new().randf_range(0.5,0.9)
 
 func get_move_away_from_edge_score():
-	return blackBoard.get_distance_from_closest_edge(global_position)
+	return blackBoard.get_distance_from_closest_edge_score(global_position)
+
+func get_move_away_from_closest_character_score():
+	return blackBoard.get_closest_character_distance_score(self)
+
+
+
 func sort_descending(a, b):
 	if a.value > b.value:
 		return true
@@ -66,6 +76,12 @@ func move_away_from_edge():
 
 	velocity = direction * SPEED
 
+func move_away_from_closest_character():
+	var closest_character = blackBoard.get_closest_character(self)
+	var direction = (-global_position.direction_to(closest_character.global_position) + lastDirection).normalized()
+	lastDirection = direction
+
+	velocity = direction * SPEED
 
 
 
