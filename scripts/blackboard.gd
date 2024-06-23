@@ -73,7 +73,7 @@ func get_distance_from_closest_edge_score(target_position: Vector2)->float:
 	#-----------	normalized_distance_from_closest_edge = distance_point_edge / distance_t_center_edge
 
 
-func get_all_children(in_node: Node, array := [])-> Array[Node]:
+func get_all_children(in_node: Node, array:Array[Node]= [])-> Array[Node]:
 	array.push_back(in_node)
 	for child in in_node.get_children():
 		array = get_all_children(child, array)

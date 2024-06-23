@@ -44,7 +44,7 @@ func compute_action_value(action:Dictionary)->Dictionary:
 
 
 func _physics_process(_delta:float)->void:
-	var resolved_actions:Array[Dictionary] = actions.map(compute_action_value)
+	var resolved_actions:Array = actions.map(compute_action_value)
 	resolved_actions.sort_custom(sort_descending)
 
 	resolved_actions[0].action_fn.call()
