@@ -4,6 +4,7 @@ class_name BasicCharacter extends CharacterBody2D
 const SPEED = 300.0
 
 var lastDirection: Vector2 = Vector2.RIGHT
+signal position_updated(new_position:Vector2)
 
 @export var blackBoard:BlackBoard
 
@@ -49,7 +50,7 @@ func _physics_process(_delta:float)->void:
 
 	resolved_actions[0].action_fn.call()
 	move_and_slide()
-
+	position_updated.emit(global_position)
 
 
 

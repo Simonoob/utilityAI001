@@ -7,7 +7,7 @@
 script = ExtResource("2_37aqr")
 basic_character_scene = ExtResource("1_amnr8")
 
-[node name="basicCharacter2" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
+[node name="basicCharacter" parent="." node_paths=PackedStringArray("blackBoard") instance=ExtResource("1_amnr8")]
 position = Vector2(302, 200)
 blackBoard = NodePath("..")
 

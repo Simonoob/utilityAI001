@@ -7,12 +7,22 @@ class_name BlackBoard extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready()->void:
-	pass # Replace with function body.
+	get_node('basicCharacter').position_updated.connect(on_position_updated)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta:float)->void:
 	pass
+
+
+# UPDATING INFO
+func  on_position_updated(new_position: Vector2)->void:
+	print('new position:', new_position)
+
+# INFO STORAGE
+#howtf
+
+
 
 # EASING FUNCTIONS
 func ease_in_circ(x: float) -> float:
@@ -114,6 +124,9 @@ func get_closest_character_distance_score(target_character:BasicCharacter) -> fl
 var count: int = 1
 
 func _on_timer_timeout() -> void:
+	if count > 5:
+		return
+
 	var new_character: BasicCharacter = basic_character_scene.instantiate()
 	new_character.blackBoard = self
 	new_character.position = Vector2.ZERO
@@ -122,5 +135,7 @@ func _on_timer_timeout() -> void:
 	count+=1
 	print(count)
 	# getting all action scores in physics_process tanks the fps at about 40 characters (on windows destkop)
+
+	new_character.position_updated.connect(on_position_updated)
 
 
